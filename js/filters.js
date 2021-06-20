@@ -23,7 +23,7 @@ myApp.filter('fmtnum', function($filter) {
     } else if (num >= 1) {
       return round(num, 4).toString();
     } else {
-      return round(num, 6).toString();
+      return parseFloat(num.toPrecision(5)).toString();
     }
   }
 });

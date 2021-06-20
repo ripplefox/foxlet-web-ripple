@@ -38,12 +38,15 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
         t.source = tx.specification.source.address;
         t.destination = tx.specification.destination.address;
         t.tag = tx.specification.destination.tag;
-        if ($rootScope.address == t.source) {
+        if ($rootScope.address == t.source && $rootScope.address == t.destination) {
+          t.type = 'convert';
+        } else if ($rootScope.address == t.source) {
           t.type = 'sent';
         } else if ($rootScope.address == t.destination) {
           t.type = 'received';
         }
         t.delivered = tx.outcome.deliveredAmount;
+        t.spent = tx.specification.source.maxAmount
       }
       if (tx.type == 'trustline') {
         if ($rootScope.address == tx.specification.counterparty) {

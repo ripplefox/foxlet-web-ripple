@@ -31,13 +31,6 @@ myApp.directive('txPayment', [ function() {
     replace : true
   }
 } ]);
-myApp.directive('txConvert', [ function() {
-  return {
-    restrict : 'E',
-    templateUrl : 'directive/tx-convert.html',
-    replace : true
-  }
-} ]);
 myApp.directive('txTrust', [ function() {
   return {
     restrict : 'E',
