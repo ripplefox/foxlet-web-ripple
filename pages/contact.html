@@ -7,7 +7,7 @@
 	    <div class="col-xs-3 col-sm-3 col-md-3" translate="contact">Contact</div>
 	    <div class="col-xs-6 col-sm-5 col-md-7" translate="address">Address</div>
 	    <div class="col-xs-12 col-sm-4 col-md-2 text-right">
-	    	<a ng-click="toggle_form()" ng-disabled="addform_visible" class="btn btn-block btn-success btn-sm" translate="add_contact">Add contact</a>
+	    	<a ng-click="toggle_form()" ng-disabled="addform_visible" class="btn btn-block btn-success btn-sm" translate="add_contact" ng-hide="true">Add contact</a>
 	    </div>
 	  </div>
 	  <hr>
@@ -67,7 +67,7 @@
 	    </div>
 	    <div ng-hide="editing" class="col-xs-6 col-sm-3 col-md-3 text-right pull-right">
 	      <div class="row">
-	        <div ng-hide="editing" class="col-xs-4 col-md-4 col-sm-4">
+	        <div ng-hide="editing || true" class="col-xs-4 col-md-4 col-sm-4">
 	          <button ng-click="edit($index)" class="edit btn btn-block btn-default btn-sm btn-link" translate="edit">edit</button>
 	        </div>
 	        <div ng-hide="editing" class="col-xs-8 col-md-8 col-sm-8">
