@@ -2,6 +2,7 @@
 
 myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'AuthenticationFactory',
   function($scope, $rootScope, XrpApi, AuthenticationFactory) {
+    const address = $rootScope.address;
     $scope.history = [];
     $scope.loading = false;
     $scope.marker = null;
@@ -14,7 +15,7 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
         $scope.error_msg = "";
         $scope.marker = data.id;
         data.transactions.forEach(tx => {
-          $scope.history.push(_process(tx));
+          $scope.history.push(processTx(tx));
         });
         console.debug(data);
         $scope.$apply();
@@ -32,24 +33,24 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
     };
     $scope.refresh();
     
-    function _process(tx) {
+    function processTx(tx) {
       var t = {};
       if (tx.type == 'payment') {
         t.source = tx.specification.source.address;
         t.destination = tx.specification.destination.address;
         t.tag = tx.specification.destination.tag;
-        if ($rootScope.address == t.source && $rootScope.address == t.destination) {
+        if (address == t.source && address == t.destination) {
           t.type = 'convert';
-        } else if ($rootScope.address == t.source) {
+        } else if (address == t.source) {
           t.type = 'sent';
-        } else if ($rootScope.address == t.destination) {
+        } else if (address == t.destination) {
           t.type = 'received';
         }
         t.delivered = tx.outcome.deliveredAmount;
         t.spent = tx.specification.source.maxAmount
       }
       if (tx.type == 'trustline') {
-        if ($rootScope.address == tx.specification.counterparty) {
+        if (address == tx.specification.counterparty) {
           t.counterparty = tx.address;
           t.type = 'trusted';
         } else {
@@ -59,70 +60,50 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
         t.currency = tx.specification.currency;
         t.limit = tx.specification.limit;
       }
+      if (tx.type == 'order') {
+        t.type = tx.specification.direction;
+        if (t.type == 'sell') {
+          t.quantity = tx.specification.quantity;
+          t.total = tx.specification.totalPrice;
+        } else {
+          t.quantity = tx.specification.quantity;
+          t.total = tx.specification.totalPrice;
+        }
+        t.price = new BigNumber(t.total.value).dividedBy(t.quantity.value).toString();
+      }
+      if (tx.type == 'orderCancellation') {
+        t.type = 'cancel';
+        t.seq = tx.specification.orderSequence;
+      }
 
       t.memos = tx.specification.memos;
       t.date = tx.outcome.timestamp;
       tx.transaction = t;
-
-      var effects = []
-      //The status of the order. One of "created", "filled", "partially-filled", "cancelled".
-      for (let account in tx.outcome.orderbookChanges) {
-        let orders = tx.outcome.orderbookChanges[account];
-        orders.forEach(order => {
-          let e = {};
-          e.type = 'offer_bought';
-          if (order.direction == 'buy') {
-            e.got = order.totalPrice;
-            e.paid = order.quantity;
-            e.price = order.makerExchangeRate;
-          } else {
-            e.got = order.quantity;
-            e.paid = order.totalPrice;
-            e.price = order.makerExchangeRate;
-          }
-          effects.push(e);
-        });
-      }
-      tx.effects = effects;
+      tx.effects = filterOrderbookChanges(tx.outcome.orderbookChanges);
 
       return tx;
     }
-    
-    // filter effect types
-    // Show only offer_funded, offer_partially_funded, offer_cancelled,
-    // offer_bought, trust_change_no_ripple side effects
-    var filterEffects = function (tx) {
-      if (!tx) return null;
 
-      var event = $.extend(true, {}, tx);
-      var effects = [];
-
-      if (event.effects) {
-        event.effects.forEach(effect => {
-          if (effect.type == 'offer_funded'
-            || effect.type == 'offer_partially_funded'
-            || effect.type == 'offer_bought'
-            || effect.type == 'trust_change_no_ripple'
-            || effect.type === 'offer_cancelled')
-          {
-            if (effect.type === 'offer_cancelled' && event.transaction
-              && event.transaction.type === 'offercancel') {
-              return
-            }
-            effects.push(effect);
-          } else if (effect.type == 'balance_change' & tx.tx_type == 'AccountDelete') {
-            effects.push(effect);
+    function filterOrderbookChanges(orderbookChanges) {
+      var effects = []
+      //The status of the order. One of "created", "filled", "partially-filled", "cancelled".
+      for (let account in orderbookChanges) {
+        let orders = orderbookChanges[account];
+        orders.forEach(order => {
+          let e = {};
+          if (account == address) {
+            e.type = order.direction == 'buy' ? 'offer_bought' : 'offer_sold';
+          } else {
+            e.type = order.direction == 'sell' ? 'offer_bought' : 'offer_sold';
           }
+          e.quantity = order.quantity;
+          e.total = order.totalPrice;
+          e.price = new BigNumber(e.total.value).dividedBy(e.quantity.value).toString();
+          effects.push(e);
         });
-        event.showEffects = effects;
       }
-
-      if (effects.length || event.transaction) {
-        return event;
-      } else {
-        return null;
-      }
-    };
+      return effects;
+    }
     
   } ]);
 

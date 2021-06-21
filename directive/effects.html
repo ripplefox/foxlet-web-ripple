@@ -61,11 +61,19 @@
 			<!-- ngSwitchWhen: offer_bought -->
 			<span ng-switch-when="offer_bought">
 				{{ 'you_bought' | translate }}
-				<strong>{{effect.got.value | fmtnum}} {{effect.got.currency | rpcurrency:native.code}}</strong> 
+				<strong>{{effect.quantity.value | fmtnum}} {{effect.quantity.currency | rpcurrency:native.code}}</strong> 
 				{{ 'you_bought_for' | translate }}
-				<strong>{{effect.paid.value | fmtnum}} {{effect.paid.currency | rpcurrency:native.code}}</strong> 
+				<strong>{{effect.total.value | fmtnum}} {{effect.total.currency | rpcurrency:native.code}}</strong> 
 				({{ 'price' | translate }} <strong>{{effect.price | fmtnum}}</strong>)
 			</span>
+			<span ng-switch-when="offer_sold">
+				{{ 'you_sold' | translate }}
+				<strong>{{effect.quantity.value | fmtnum}} {{effect.quantity.currency | rpcurrency:native.code}}</strong> 
+				{{ 'you_sold_for' | translate }}
+				<strong>{{effect.total.value | fmtnum}} {{effect.total.currency | rpcurrency:native.code}}</strong> 
+				({{ 'price' | translate }} <strong>{{effect.price | fmtnum}}</strong>)
+			</span>
+
 			<!-- ngSwitchWhen: trust_create_local -->
 			<span ng-switch-when="trust_create_local">
 				You now trust {{effect.counterparty}} for {{effect.limit | fmtnum}} {{effect.limit | rpcurrency:native.code}}

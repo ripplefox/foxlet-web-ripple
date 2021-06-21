@@ -148,7 +148,7 @@ var translate_cn = {
   you_sell_for: '得到',
   you_buy: '你创建了一个买单，买入',
   you_buy_for: '花费',
-  you_cancel: '你取消了委托单：接受',
+  you_cancel: '你取消了委托单：',
   you_cancel_for: '花费',
   you_trust: '你把',
   you_trust_for: '的信任额度调整为',

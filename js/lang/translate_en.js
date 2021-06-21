@@ -148,7 +148,7 @@ var translate_en = {
   you_sell_for: 'for',
   you_buy: 'You created an order to buy',
   you_buy_for: 'for',
-  you_cancel: 'You cancelled an order accepting',
+  you_cancel: 'You cancelled an order.',
   you_cancel_for: 'for',
   you_trust: 'You now trust',
   you_trust_for: 'for',

@@ -31,7 +31,7 @@ myApp.controller("TradeCtrl", [ '$scope', '$rootScope', 'XrpApi', 'XrpOrderbook'
             taker_pays = native2coin(offer.specification.quantity);
             quantity = taker_pays;
             total  = taker_gets;
-            price = new BigNumber(taker_gets.value).dividedBy(quantity.value).toString();
+            price = new BigNumber(total.value).dividedBy(quantity.value).toString();
           }
           id = offer.properties.sequence;
           this.all[id] = {

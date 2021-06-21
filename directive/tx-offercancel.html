@@ -1,14 +1,12 @@
 <div class="row offercancel">
 	<div class="col-xs-3">
-		{{tx.date | date:'yyyy-MM-dd HH:mm:ss'}}
+		{{tx.transaction.date | date:'yyyy-MM-dd HH:mm:ss'}}
 	</div>
 	<div class="col-xs-9">
 		<div class="transaction">
 				<span>
 					{{ 'you_cancel' | translate }}
-					<strong>{{tx.transaction.pays | fmtnum}} {{tx.transaction.pays | rpcurrency:native.code}}</strong>
-					{{ 'you_cancel_for' | translate }}
-					<strong>{{tx.transaction.gets | fmtnum}} {{tx.transaction.gets | rpcurrency:native.code}}</strong>
+					<strong>{{tx.transaction.seq}}</strong>
 				</span>
 				<effects></effects>
 		</div>

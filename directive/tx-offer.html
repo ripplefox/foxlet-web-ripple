@@ -4,17 +4,19 @@
 	</div>
 	<div class="col-xs-9">
 		<div class="transaction">
-				<span ng-show="tx.transaction.sell">
+				<span ng-show="tx.transaction.type = 'sell'">
 					{{ 'you_sell' | translate }}
-					<strong>{{tx.transaction.gets | fmtnum}} {{tx.transaction.gets | rpcurrency:native.code}}</strong>
+					<strong>{{tx.transaction.quantity.value | fmtnum}} {{tx.transaction.quantity.currency | rpcurrency:native.code}}</strong>
 					{{ 'you_sell_for' | translate }}
-					<strong>{{tx.transaction.pays | fmtnum}} {{tx.transaction.pays | rpcurrency:native.code}}</strong>
+					<strong>{{tx.transaction.total.value | fmtnum}} {{tx.transaction.total.currency | rpcurrency:native.code}}</strong>
+					({{ 'price' | translate }} <strong>{{tx.transaction.price | fmtnum}}</strong>)
 				</span>
-				<span ng-hide="tx.transaction.sell">
+				<span ng-hide="tx.transaction.type = 'buy'">
 					{{ 'you_buy' | translate }}
-					<strong>{{tx.transaction.pays | fmtnum}} {{tx.transaction.pays | rpcurrency:native.code}}</strong>
+					<strong>{{tx.transaction.quantity.value | fmtnum}} {{tx.transaction.quantity.currency | rpcurrency:native.code}}</strong>
 					{{ 'you_buy_for' | translate }}
-					<strong>{{tx.transaction.gets | fmtnum}} {{tx.transaction.gets | rpcurrency:native.code}}</strong>
+					<strong>{{tx.transaction.total.value | fmtnum}} {{tx.transaction.total.currency | rpcurrency:native.code}}</strong>
+					({{ 'price' | translate }} <strong>{{tx.transaction.price | fmtnum}}</strong>)
 				</span>
 				
 				<effects></effects>
