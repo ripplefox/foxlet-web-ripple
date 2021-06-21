@@ -9,7 +9,6 @@ myApp.factory('SettingFactory', function($window) {
         networkType: 'xrp',
         servers: [
           {server: 's1.ripple.com', port: 443},
-          {server: 's2.ripple.com', port: 443},
           {server: 's-west.ripple.com', port: 443},
           {server: 's-east.ripple.com', port: 443},
           {server: 'xrpl.ws', port: 443},
