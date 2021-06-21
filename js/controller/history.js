@@ -60,15 +60,10 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
         t.currency = tx.specification.currency;
         t.limit = tx.specification.limit;
       }
-      if (tx.type == 'order') {
+      if (tx.type == 'order' && address == tx.address) {
         t.type = tx.specification.direction;
-        if (t.type == 'sell') {
-          t.quantity = tx.specification.quantity;
-          t.total = tx.specification.totalPrice;
-        } else {
-          t.quantity = tx.specification.quantity;
-          t.total = tx.specification.totalPrice;
-        }
+        t.quantity = tx.specification.quantity;
+        t.total = tx.specification.totalPrice;
         t.price = new BigNumber(t.total.value).dividedBy(t.quantity.value).toString();
       }
       if (tx.type == 'orderCancellation') {
@@ -79,12 +74,12 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
       t.memos = tx.specification.memos;
       t.date = tx.outcome.timestamp;
       tx.transaction = t;
-      tx.effects = filterOrderbookChanges(tx.outcome.orderbookChanges, address);
+      tx.effects = filterOrderbookChanges(tx.outcome.orderbookChanges, address, tx);
 
       return tx;
     }
 
-    function filterOrderbookChanges(orderbookChanges, address) {
+    function filterOrderbookChanges(orderbookChanges, address, tx) {
       var effects = []
       //The status of the order. One of "created", "filled", "partially-filled", "cancelled".
       for (let account in orderbookChanges) {
@@ -95,8 +90,10 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
             switch (order.status) {
               case "cancelled": 
                 e.type = 'offer_cancel_' + order.direction;
+                e.force = address != tx.address;
                 break;               
               case "filled":
+                e.filled = true;
               case "partially-filled":
                 e.type = order.direction == 'buy' ? 'offer_bought' : 'offer_sold';
                 break;
@@ -104,24 +101,29 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
                 e.type = 'offer_create_' + order.direction;
                 break;
               default: 
-                console.error("Unsupported " + order.status, order);
+                console.error("Unsupported " + order.status, tx);
             }
           } else {
             switch (order.status) {
               case "filled":
               case "partially-filled":
-                e.type = order.direction == 'sell' ? 'offer_bought' : 'offer_sold';
+                if (address == tx.address) {
+                  e.type = order.direction == 'sell' ? 'offer_bought' : 'offer_sold';
+                }
                 break;
               case "cancelled": 
               case "created":
+                break;
               default: 
-                console.error("Unsupported " + order.status, order);
+                console.error("Unsupported " + order.status, tx);
             }
           }
           e.quantity = order.quantity;
           e.total = order.totalPrice;
           e.price = new BigNumber(e.total.value).dividedBy(e.quantity.value).toString();
-          effects.push(e);
+          if (e.type) {
+            effects.push(e);
+          }
         });
       }
       return effects;

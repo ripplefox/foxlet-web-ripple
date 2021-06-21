@@ -161,6 +161,8 @@ var translate_jp = {
   bal_change : 'あなたの所有資産が変動しました',
   order_cancel: '注文：以下の金額を払います',
   order_cancel_for: '以下の資産を購入します',
+  order_cancel_buy: '以下の資産を購入します',
+  order_cancel_sell: '以下の資産を売却します',
   order_cancel_due: '資金不足のため、キャンセルされました。',
   accountset: 'アカウントの情報が更新されました',
   rippling: '同種類の貨幣はスワップ可能',

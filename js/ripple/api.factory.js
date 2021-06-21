@@ -229,7 +229,7 @@ myApp.factory('XrpApi', ['$rootScope', 'AuthenticationFactory', 'ServerManager',
       checkTx(last_id, address) {
         var address = address || this.address;
         var opt = {
-            limit: 10
+            limit: 25
         };
         if (last_id) {
           console.log("start", last_id);
