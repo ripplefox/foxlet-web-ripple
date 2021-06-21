@@ -79,12 +79,12 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
       t.memos = tx.specification.memos;
       t.date = tx.outcome.timestamp;
       tx.transaction = t;
-      tx.effects = filterOrderbookChanges(tx.outcome.orderbookChanges);
+      tx.effects = filterOrderbookChanges(tx.outcome.orderbookChanges, address);
 
       return tx;
     }
 
-    function filterOrderbookChanges(orderbookChanges) {
+    function filterOrderbookChanges(orderbookChanges, address) {
       var effects = []
       //The status of the order. One of "created", "filled", "partially-filled", "cancelled".
       for (let account in orderbookChanges) {
@@ -101,11 +101,22 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
                 e.type = order.direction == 'buy' ? 'offer_bought' : 'offer_sold';
                 break;
               case "created":
+                e.type = 'offer_create_' + order.direction;
+                break;
               default: 
-                throw new Error("Unsupported status");
+                console.error("Unsupported " + order.status, order);
             }
           } else {
-            e.type = order.direction == 'sell' ? 'offer_bought' : 'offer_sold';
+            switch (order.status) {
+              case "filled":
+              case "partially-filled":
+                e.type = order.direction == 'sell' ? 'offer_bought' : 'offer_sold';
+                break;
+              case "cancelled": 
+              case "created":
+              default: 
+                console.error("Unsupported " + order.status, order);
+            }
           }
           e.quantity = order.quantity;
           e.total = order.totalPrice;
