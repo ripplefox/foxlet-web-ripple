@@ -92,7 +92,18 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
         orders.forEach(order => {
           let e = {};
           if (account == address) {
-            e.type = order.direction == 'buy' ? 'offer_bought' : 'offer_sold';
+            switch (order.status) {
+              case "cancelled": 
+                e.type = 'offer_cancel_' + order.direction;
+                break;               
+              case "filled":
+              case "partially-filled":
+                e.type = order.direction == 'buy' ? 'offer_bought' : 'offer_sold';
+                break;
+              case "created":
+              default: 
+                throw new Error("Unsupported status");
+            }
           } else {
             e.type = order.direction == 'sell' ? 'offer_bought' : 'offer_sold';
           }
