@@ -5,7 +5,7 @@
 		</div>
 		<div class="AssetCard__content">
 			<div class="AssetCard__header">
-				<span class="AssetCard__code">{{__code}}</span> 
+				<span class="AssetCard__code">{{__code | rpcurrency}}</span> 
 				<a class="AssetCard__federation" href="{{__website}}" target="_blank" ng-show="__website">{{__name}}</a>
 				<span class="AssetCard__federation" ng-show="!__website">{{__name}}</span>
 			</div>

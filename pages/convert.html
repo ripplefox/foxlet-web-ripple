@@ -16,14 +16,14 @@
 											<div class="dropdown">
 										    <button class="btn btn-default dropdown-toggle form-control nopadding" ng-disabled="!currencies.length" type="button" data-toggle="dropdown">
 										    	<div class="content" style="">
-										    		<div class="currency">{{dst_currency}} </div>
+										    		<div class="currency">{{dst_currency | rpcurrency}} </div>
 										    		<div class="dropdown-addon" ng-show="currencies.length"><i class="fa fa-sort-desc" aria-hidden="true"></i></div>
 										    	</div>
 										    </button>
 										    <ul class="dropdown-menu" role="menu">
 										    	<li role="presentation"><a role="menuitem" href="" ng-click="pickCode(native.code)">{{native.code}}</a></li>
 										      <li role="presentation" ng-repeat="code in currencies">
-										      	<a role="menuitem" href="" ng-click="pickCode(code)">{{code}}</a>
+										      	<a role="menuitem" href="" ng-click="pickCode(code)">{{code | rpcurrency}}</a>
 										      </li>
 										    </ul>
 										  </div>
@@ -48,10 +48,10 @@
 						<div ng-repeat="(key, alt) in paths" class="col-xs-12 col-sm-6 col-md-4">
 							<div class="am">
 								<span class="amnt">{{alt.value}}</span>
-								<span class="currency">{{alt.code}}</span>
-								<div class="ex">(<span class="rate">{{alt.rate}}</span><span class="pair">{{dst_currency}}/{{alt.code}}</span>)</div>
+								<span class="currency">{{alt.code | rpcurrency}}</span>
+								<div class="ex">(<span class="rate">{{alt.rate}}</span><span class="pair">{{dst_currency | rpcurrency}}/{{alt.code | rpcurrency}}</span>)</div>
 							</div>
-							<button ng-click="pick(alt.code)" class="btn btn-block btn-success">{{'convert' | translate}} {{alt.code}}</button>
+							<button ng-click="pick(alt.code)" class="btn btn-block btn-success">{{'convert' | translate}} {{alt.code | rpcurrency}}</button>
 						</div>
 				</div>
 				<div class="row pathupdate" ng-show="found">
@@ -61,11 +61,11 @@
 			<group ng-show="mode == 'confirm'">
 			  <div class="mode-confirm row">
 					<p translate="converting">You are converting</p>
-					<p class="amount_feedback"><span class="value">{{asset.value}} </span><span class="currency">{{asset.code}}</span></p>
+					<p class="amount_feedback"><span class="value">{{asset.value}} </span><span class="currency">{{asset.code | rpcurrency}}</span></p>
 					<p translate="converting_to">to</p>
-					<p class="amount_feedback"><span class="value">{{dst_amount}} </span><span class="currency">{{dst_currency}}</span></p>
+					<p class="amount_feedback"><span class="value">{{dst_amount}} </span><span class="currency">{{dst_currency | rpcurrency}}</span></p>
 					<p translate="pay_most">You will pay at most</p>
-					<p class="amount_feedback"><span class="value">{{asset.value}} </span><span class="currency">{{asset.code}}  </span><span>± 1%</span></p>
+					<p class="amount_feedback"><span class="value">{{asset.value}} </span><span class="currency">{{asset.code | rpcurrency}}  </span><span>± 1%</span></p>
 					<p translate="are_you_sure">Are you sure?</p>
 				</div>
 				

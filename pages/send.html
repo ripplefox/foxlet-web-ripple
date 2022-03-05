@@ -30,14 +30,14 @@
 													<div class="dropdown">
 												    <button class="btn btn-default dropdown-toggle form-control nopadding" ng-disabled="!currencies.length" type="button" data-toggle="dropdown">
 												    	<div class="content" style="">
-												    		<div class="currency">{{asset.code}} </div>
+												    		<div class="currency">{{asset.code | rpcurrency}} </div>
 												    		<div class="dropdown-addon" ng-show="currencies.length"><i class="fa fa-sort-desc" aria-hidden="true"></i></div>
 												    	</div>
 												    </button>
 												    <ul class="dropdown-menu" role="menu">
 												    	<li role="presentation"><a role="menuitem" href="" ng-click="pickCode(native.code)">{{native.code}}</a></li>
 												      <li role="presentation" ng-repeat="code in currencies">
-												      	<a role="menuitem" href="" ng-click="pickCode(code)">{{code}}</a>
+												      	<a role="menuitem" href="" ng-click="pickCode(code)">{{code | rpcurrency}}</a>
 												      </li>
 												    </ul>
 												  </div>
@@ -59,7 +59,9 @@
 								</div>
 								<div class="row noborder">
 									<div ng-show="asset.code == native.code" class="col-xs-12 col-sm-6 col-md-6">
-										<button type="submit" class="btn btn-block btn-success" ng-click="pickPath(asset.code)" ng-disabled="invalid_address || invalid_amount || invalid_tag">{{'send' | translate}} {{asset.code}}</button>
+										<button type="submit" class="btn btn-block btn-success" ng-click="pickPath(asset.code)" ng-disabled="invalid_address || invalid_amount || invalid_tag">
+											{{'send' | translate}} {{asset.code | rpcurrency}}
+										</button>
 									</div>
 								</div>
 					</group>
@@ -95,7 +97,7 @@
 										<div class="input-group">
 											<input type="number" autocomplete="off" placeholder="0.00" class="form-control"
 											  ng-model="service_amount" ng-model-options="{debounce:800}" required="true">
-											<div class="input-group-addon">{{service_currency}}</div>
+											<div class="input-group-addon">{{service_currency | rpcurrency}}</div>
 										</div>
 									</div>
 							</div>
@@ -116,10 +118,10 @@
 							<div ng-repeat="alt in paths" class="col-xs-12 col-sm-6 col-md-4">
 								<div class="am">
 									<span class="amnt">{{alt.value}}</span>
-									<span class="currency">{{alt.code}}</span>
-									<div class="ex">(<span class="rate">{{alt.rate}}</span><span class="pair">{{asset.code}}/{{alt.code}}</span>)</div>
+									<span class="currency">{{alt.code | rpcurrency}}</span>
+									<div class="ex">(<span class="rate">{{alt.rate}}</span><span class="pair">{{asset.code | rpcurrency}}/{{alt.code | rpcurrency}}</span>)</div>
 								</div>
-								<button type="submit" ng-click="pickPath(alt.code)" class="btn btn-block btn-success">{{'send' | translate}} {{alt.code}}</button>
+								<button type="submit" ng-click="pickPath(alt.code)" class="btn btn-block btn-success">{{'send' | translate}} {{alt.code | rpcurrency}}</button>
 							</div>
 					</div>
 					<div class="row pathupdate" ng-show="found">
@@ -157,9 +159,9 @@
 							<div class="extra" ng-show="real_address && real_address != input_address">{{real_address}}</div>
 						</div>
 						<p translate="will_receive">Recipient will receive</p>
-						<p class="amount_feedback"><span class="value">{{asset.amount}} </span><span class="currency">{{asset.code}}</span></p>
+						<p class="amount_feedback"><span class="value">{{asset.amount}} </span><span class="currency">{{asset.code | rpcurrency}}</span></p>
 						<p translate="pay_most">You will pay at most</p>
-						<p class="amount_feedback"><span class="value">{{path.value}} </span><span class="currency">{{path.code}}</span><span ng-show="path.origin">± 1%</span></p>
+						<p class="amount_feedback"><span class="value">{{path.value}} </span><span class="currency">{{path.code | rpcurrency}}</span><span ng-show="path.origin">± 1%</span></p>
 						<p translate="are_you_sure">Are you sure?</p>
 					</div>
 					

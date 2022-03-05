@@ -31,7 +31,7 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           website : 'https://www.bitstamp.net/',
           service : [],
           assets : [
-            {code : 'USD', issuer : 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B', list: true},
+            {code : 'USD', issuer : 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B', list: false},
             {code : 'BTC', issuer : 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'}
           ],
           logo : "img/gateway/bitstamp.png"
@@ -56,6 +56,15 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           ],
           logo : "img/coin/xag.png"
         },
+        "sologenic.com" : {
+          name : 'sologenic.com',
+          website : 'https://www.sologenic.com/',
+          service : [],
+          assets : [
+            {code : 'SOLO', issuer : 'rsoLo2S1kiGeCcn6hCUXVrCpGMWLrRrLZz', list: true}
+          ],
+          logo : "img/gateway/sologenic.jpg"
+        },
         "dxperts.org" : {
           name : 'dxperts.org',
           website : 'https://dxperts.org/',
@@ -65,25 +74,6 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           ],
           logo : "img/gateway/dxperts.png"
         }
-    };
-    
-    let _testingnet = {
-        "xrptoolkit.com" : {
-          name : 'xrptoolkit.com',
-          website : 'https://xrptoolkit.com',
-          service : [],
-          assets : [
-            {code : 'USD', issuer : 'rD9W7ULveavz8qBGM1R5jMgK2QKsEDPQVi', list: true, name: "USD (Testing)"},
-            {code : 'BTC', issuer : 'rD9W7ULveavz8qBGM1R5jMgK2QKsEDPQVi', list: true, name: "BTC (Testing)"},
-            {code : 'ETH', issuer : 'rD9W7ULveavz8qBGM1R5jMgK2QKsEDPQVi', name: "ETH (Testing)"},
-            {code : 'EUR', issuer : 'rD9W7ULveavz8qBGM1R5jMgK2QKsEDPQVi', name: "EUR (Testing)"},
-          ],
-          logo : "img/gateway/xrptoolkit.png"
-        }
-    };
-    
-    function key(code, issuer) {
-      return code == 'XRP' ? code : code + '.' + issuer;
     };
     
     let _asset2gateway = {};
@@ -104,14 +94,6 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
         }
       });
     }
-    //add testing net asset to asset2gateway
-    _testingnet["xrptoolkit.com"].assets.forEach(asset => {
-      _asset2gateway[asset.issuer] = {
-          name : _testingnet["xrptoolkit.com"].name,
-          website : _testingnet["xrptoolkit.com"].website,
-          logo : _testingnet["xrptoolkit.com"].logo
-      }
-    });
     
     return {
       getGateway(code, issuer) {
@@ -124,12 +106,6 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
       },
       
       get gateways() {
-        if ($rootScope.currentNetwork.networkType == 'xrpTest') {
-          return _testingnet;
-        } 
-        if ($rootScope.currentNetwork.networkType == 'xag') {
-          return {};
-        }
         return _gateways;
       },
       

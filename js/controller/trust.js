@@ -53,6 +53,7 @@ myApp.controller("TrustCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Gateways', 'F
       $scope.manual_name = gateway.name;
     }
     $scope.hasLine = function(code, issuer) {
+      code = realCode(code);
       if (!$rootScope.lines[code] || !$rootScope.lines[code][issuer]) {
         return false;
       }
@@ -139,8 +140,4 @@ myApp.controller("TrustCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Gateways', 'F
       $scope.$apply();
     });
 
-    function key(code, issuer) {
-      return code == $rootScope.currentNetwork.coin.code ? code : code + '.' + issuer;
-    };
-    
   } ]);

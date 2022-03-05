@@ -267,3 +267,11 @@ var realCode = function(input) {
 var fmtCode = function(input) {
   return input && input.length == 40 ? hexToAscii(input) : input;
 };
+
+var key = function(code, issuer) {
+  if (!code) {
+    return "NONE";
+  }
+  code = realCode(code);
+  return code == 'XRP' ? code : code + '.' + issuer;
+};

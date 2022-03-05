@@ -24,7 +24,7 @@
 								</div>
 								<div class="row__shareOption">
 									<button class="btn btn-danger" ng-show="hasLine(asset.code, asset.issuer)" ng-click="delTrust(asset.code, asset.issuer)" ng-disabled="isChanging(asset.code, asset.issuer)">{{'trust_remove' | translate}}</button>
-									<button class="btn btn-success" ng-hide="hasLine(asset.code, asset.issuer)" ng-click="addTrust(asset.code, asset.issuer)" ng-disabled="isChanging(asset.code, asset.issuer)">{{'trust_add' | translate}} {{asset.code}}</button>
+									<button class="btn btn-success" ng-hide="hasLine(asset.code, asset.issuer)" ng-click="addTrust(asset.code, asset.issuer)" ng-disabled="isChanging(asset.code, asset.issuer)">{{'trust_add' | translate}} {{asset.code | rpcurrency}}</button>
 								</div>
 							</div>
 							<div class="row" ng-show="getError(asset.code, asset.issuer)">
@@ -111,7 +111,7 @@
 		</div>
 	</div>
 	
-	<div class="so-back islandBack" ng-show="mode == 'manual'">
+	<div class="so-back islandBack" ng-show="false">
 		<div class="island">
 			<div class="island__header" translate="fed_add">Add trust via federation</div>
 			<div class="row noborder">
