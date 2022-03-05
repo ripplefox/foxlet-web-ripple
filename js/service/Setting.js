@@ -7,12 +7,11 @@ myApp.factory('SettingFactory', function($window) {
         name: "Ripple Public Network",
         translationKey: 'public_url',
         networkType: 'xrp',
-        servers: [
-          {server: 's1.ripple.com', port: 443},
+        servers: [          
           {server: 'xrplcluster.com', port: 443},
           {server: 'xrpl.link', port: 443},
           {server: 'xrpl.ws', port: 443},
-          {server: 'ws.foxcny.com', port: 443}
+          {server: 's1.ripple.com', port: 443}
         ],
         coin: {
           name: "ripple",
@@ -22,53 +21,53 @@ myApp.factory('SettingFactory', function($window) {
         },
         tabs: ["history", "trade", "balance", "send", "trust", "service", "dapp"]
       },
-      xrpTest: {
-        name: "Ripple Test Network",
-        translationKey: 'test_url',
-        networkType: 'xrpTest',
-        servers: [
-          {server: 's.altnet.rippletest.net', port: 51233}
-        ],
-        coin: {
-          name: "ripple",
-          atom: "drop",
-          code: "XRP",
-          logo: "img/coin/xrp.png"
-        },
-        tabs: ["history", "trade", "balance", "send", "trust"]
-      },
-      xag: {
-        name: "XAG Fork",
-        translationKey: 'xag_url',
-        networkType: 'xag',
-        servers: [
-          {server: 'g1.xrpgen.com', port: 443},
-          {server: 'g2.xrpgen.com', port: 443},
-          {server: 'g3.xrpgen.com', port: 443},
-          {server: 'g4.xrpgen.com', port: 443}
-        ],
-        coin: {
-          name: "xrpgen",
-          atom: "drop",
-          code: "XAG",
-          logo: "img/coin/xag.png"
-        },
-        tabs: ["history", "trade", "balance", "send", "trust"]
-      },
-      other: {
-        name: "User defined",
-        translationKey: 'other_url',
-        networkType: 'other',
-        servers: [
-        ],
-        coin: {
-          name: "ripple",  // TODO: ask in settings
-          atom: "drop",    // TODO: ask in settings
-          code: undefined,
-          logo: "img/waterdrop.jpg",  // TODO: ask in settings
-        },
-        tabs: ["history", "trade", "balance", "send", "trust"]
-      }
+      // xrpTest: {
+      //   name: "Ripple Test Network",
+      //   translationKey: 'test_url',
+      //   networkType: 'xrpTest',
+      //   servers: [
+      //     {server: 's.altnet.rippletest.net', port: 51233}
+      //   ],
+      //   coin: {
+      //     name: "ripple",
+      //     atom: "drop",
+      //     code: "XRP",
+      //     logo: "img/coin/xrp.png"
+      //   },
+      //   tabs: ["history", "trade", "balance", "send", "trust"]
+      // },
+      // xag: {
+      //   name: "XAG Fork",
+      //   translationKey: 'xag_url',
+      //   networkType: 'xag',
+      //   servers: [
+      //     {server: 'g1.xrpgen.com', port: 443},
+      //     {server: 'g2.xrpgen.com', port: 443},
+      //     {server: 'g3.xrpgen.com', port: 443},
+      //     {server: 'g4.xrpgen.com', port: 443}
+      //   ],
+      //   coin: {
+      //     name: "xrpgen",
+      //     atom: "drop",
+      //     code: "XAG",
+      //     logo: "img/coin/xag.png"
+      //   },
+      //   tabs: ["history", "trade", "balance", "send", "trust"]
+      // },
+      // other: {
+      //   name: "User defined",
+      //   translationKey: 'other_url',
+      //   networkType: 'other',
+      //   servers: [
+      //   ],
+      //   coin: {
+      //     name: "ripple",  // TODO: ask in settings
+      //     atom: "drop",    // TODO: ask in settings
+      //     code: undefined,
+      //     logo: "img/waterdrop.jpg",  // TODO: ask in settings
+      //   },
+      //   tabs: ["history", "trade", "balance", "send", "trust"]
+      // }
     },
 
     setTimeout : function(timeout) {
