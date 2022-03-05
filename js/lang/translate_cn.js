@@ -86,7 +86,7 @@ var translate_cn = {
   account_loading: '正在解析账号',
   sending_to   : '正在发送到',
   send_done    : '发送成功',
-  not_funded   : '未激活。请发送至少20个{{code}}创建该账号。建议发31个或更多。',
+  not_funded   : '未激活。请发送至少10个{{code}}创建该账号。建议发20个或更多。',
   no_send_path : '找不到你和目标账户之间的路径。',
   you_sending : '你将把{{code}}发送到',
 
@@ -313,7 +313,7 @@ var translate_cn = {
   new_version_available: '发现新版本',
 
   /** Error **/
-  NotFoundError : '瑞波网络未找到该账号，请先激活此账号。激活需要至少20 {{code}}。每个授信和委托单需要额外冻结5 {{code}}，建议至少用31 {{code}}完成激活。',
+  NotFoundError : '瑞波网络未找到该账号，请先激活此账号。激活需要至少10 {{code}}。每个授信和委托单需要额外冻结2 {{code}}，建议用20 {{code}}完成激活。',
   NotConnectedError : '未连接到服务器，请过一会儿再试。',
   NoRippleTXT: '网站未提供ripple.txt文件',
   NoFederationUrl: '网站未提供联邦协议服务',

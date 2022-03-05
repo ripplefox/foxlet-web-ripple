@@ -1,7 +1,7 @@
 /* global myApp, nw */
 
-myApp.controller('RegisterCtrl', ['$scope', '$rootScope', '$translate', '$window', '$location', 'FileDialog', 'AuthenticationFactory', 'Id',
-  function($scope, $rootScope, $translate, $window, $location, FileDialog, AuthenticationFactory, Id) {
+myApp.controller('RegisterCtrl', ['$scope', '$rootScope', '$translate', '$window', '$location', 'FileDialog', 'AuthenticationFactory', 'Id', 'XrpApi',
+  function($scope, $rootScope, $translate, $window, $location, FileDialog, AuthenticationFactory, Id, XrpApi) {
     $scope.password = '';
     $scope.passwordSet = {};
     $scope.password1 = '';
@@ -100,11 +100,15 @@ myApp.controller('RegisterCtrl', ['$scope', '$rootScope', '$translate', '$window
       $scope.fileInputClick();
     };
     
-    $scope.gotoFund = function() {
+    $scope.goLogin = function() {
       $scope.mode = 'register_empty_wallet';
       $scope.reset();
-
-      $location.path('/');
+      //$location.path('/');
+      XrpApi.logout();
+      AuthenticationFactory.logout();
+      $rootScope.reset();
+      console.log("goto login");
+      $location.path("/login");
     };
   }
 ]);

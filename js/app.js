@@ -34,8 +34,8 @@ myApp.config(function($routeProvider, $httpProvider, $translateProvider, $compil
       requiredLogin : false
     }
   }).when('/', {
-    templateUrl : 'pages/home.html',
-    controller : 'HomeCtrl',
+    templateUrl : 'pages/balance.html',
+    controller : 'BalanceCtrl',
     access : {
       requiredLogin : true
     }
@@ -233,3 +233,37 @@ var round = function(dight, howMany) {
   }
   return dight;
 }
+
+var hexToAscii = function(hex) {
+    var str = "";
+    var i = 0, l = hex.length;
+    if (hex.substring(0, 2) === '0x') {
+        i = 2;
+    }
+    for (; i < l; i+=2) {
+        var code = parseInt(hex.substr(i, 2), 16);
+        if (code > 0) {
+          str += String.fromCharCode(code);
+        }
+    }
+
+    return str;
+};
+
+var asciiToHex = function(str) {
+  var hex = "";
+  for(var i = 0; i < str.length; i++) {
+    var code = str.charCodeAt(i);
+    var n = code.toString(16);
+    hex += n.length < 2 ? '0' + n : n;
+  }
+  return (hex + "0000000000000000000000000000000000000000").substring(0, 40).toUpperCase();;
+};
+
+var realCode = function(input) {
+  return input && input.length > 3 && input.length <= 20 && input != "drops" ? asciiToHex(input) : input;
+};
+
+var fmtCode = function(input) {
+  return input && input.length == 40 ? hexToAscii(input) : input;
+};

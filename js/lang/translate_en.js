@@ -86,7 +86,7 @@ var translate_en = {
   account_loading: 'Loading account for',
   sending_to   : 'Sending to',
   send_done    : 'Asset successfully sent.',
-  not_funded   : 'Not funded. To create this account, send it at least 20 {{name}}s ({{code}}).',
+  not_funded   : 'Not funded. To create this account, send it at least 10 {{name}}s ({{code}}).',
   no_send_path : 'Unable to find a path between you and the destination account.',
   you_sending : 'You are sending {{code}} to',
 
@@ -313,7 +313,7 @@ var translate_en = {
   new_version_available: 'New version available',
 
   /** Error **/
-  NotFoundError : 'The resource was not found. You must have at least 20 {{name}} in your account for it to be activated! Each trust line or offer requires a 5 {{name}}  reserve in addition. To make things easy, send at least 31 {{name}}s to the account.',
+  NotFoundError : 'The resource was not found. You must have at least 10 {{name}} in your account for it to be activated! Each trust line or offer requires a 2 {{name}}  reserve in addition. To make things easy, send at least 20 {{name}}s to the account.',
   NotConnectedError : 'Not connected, please retry later.',
   NoRippleTXT: 'Ripple.txt was not found.',
   NoFederationUrl: 'Federation service url was not provided.',
