@@ -5,14 +5,11 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
         "ripplefox.com" : {
           name : 'ripplefox.com',
           website : 'https://ripplefox.com/',
-          service : [
-            {type: 'unionpay', name: 'bank'},
-            {type: 'stellar',  name: 'stellar'},
-          ],
+          deposit : 'https://ripplefox.com/deposit',
           assets : [
             {code : 'CNY', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "CNYT"},
-            {code : 'USD', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "USDT", logo: "img/coin/usdt.svg"},
-            {code : 'XLM', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "Stellar Lumens", logo: "img/coin/xlm.png"},
+            {code : 'USD', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "USDT", logo: "img/coin/usdt.svg", deposit: true, withdraw: "usdt@ripplefox.com"},
+            {code : 'XLM', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "Stellar Lumens", logo: "img/coin/xlm.png", deposit: true},
             {code : 'ULT', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "Ultiledger", logo: "img/coin/ult.png"}
           ],
           logo : "img/gateway/ripplefox.png"
@@ -84,7 +81,9 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           _asset2gateway[key(asset.code, asset.issuer)] = {
               name : gateway.name,
               website : gateway.website,
-              logo : asset.logo
+              logo : asset.logo,
+              deposit : asset.deposit ? gateway.deposit : "",
+              withdraw : asset.withdraw ? asset.withdraw : asset.code.toLowerCase() + "@" + gateway.name
           };
         }
         _asset2gateway[asset.issuer] = {
