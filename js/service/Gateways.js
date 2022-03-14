@@ -7,10 +7,17 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           website : 'https://ripplefox.com/',
           deposit : 'https://ripplefox.com/deposit',
           assets : [
-            {code : 'CNY', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "CNYT"},
             {code : 'USD', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "USDT", logo: "img/coin/usdt.svg", deposit: true, withdraw: "usdt@ripplefox.com"},
             {code : 'XLM', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "Stellar Lumens", logo: "img/coin/xlm.png", deposit: true},
             {code : 'ULT', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "Ultiledger", logo: "img/coin/ult.png"}
+          ],
+          logo : "img/gateway/ripplefox.png"
+        },
+        "foxcny.com" : {
+          name : 'foxcny.com',
+          website : 'https://foxcny.com/',
+          assets : [
+            {code : 'CNY', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "CNYT"}
           ],
           logo : "img/gateway/ripplefox.png"
         },
