@@ -268,7 +268,7 @@ myApp.factory('XrpApi', ['$rootScope', 'AuthenticationFactory', 'ServerManager',
       
       changeTrust(code, issuer, limit, ripplingDisabled = true) {
         const trustline = {
-          currency: code,
+          currency: realCode(code),
           counterparty: issuer,
           limit: limit,
           ripplingDisabled: ripplingDisabled

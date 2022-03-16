@@ -24,7 +24,6 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
         "iripplechina.com" : {
           name : 'iripplechina.com',
           website : 'http://wg.iripplechina.com',
-          service : [],
           assets : [
             {code : 'CNY', issuer : 'razqQKzJRdB4UxFPWf5NEpEG3WMkmwgcXA'}
           ],
@@ -33,7 +32,6 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
         "bitstamp.net" : {
           name : 'bitstamp.net',
           website : 'https://www.bitstamp.net/',
-          service : [],
           assets : [
             {code : 'USD', issuer : 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B', list: false},
             {code : 'BTC', issuer : 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'}
@@ -43,7 +41,6 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
         "gatehub.net" : {
           name : 'gatehub.net',
           website : 'https://www.gatehub.net/',
-          service : [],
           assets : [
             {code : 'USD', issuer : 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq'},
             {code : 'EUR', issuer : 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq'},
@@ -54,9 +51,9 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
         "xagfans.com" : {
           name : 'xagfans.com',
           website : 'https://xagfans.com/',
-          service : [],
+          deposit : 'https://xagfans.com/deposit',
           assets : [
-            {code : 'XAG', issuer : 'rpG9E7B3ocgaKqG7vmrsu3jmGwex8W4xAG', list: true}
+            {code : 'XAG', issuer : 'rpG9E7B3ocgaKqG7vmrsu3jmGwex8W4xAG', list: true, logo : "img/coin/xag.png", deposit: true, withdraw: "xag@xagfans.com"}
           ],
           logo : "img/coin/xag.png"
         },
@@ -74,7 +71,7 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           website : 'https://dxperts.org/',
           service : [],
           assets : [
-            {code : 'DXP', issuer : 'rM8AhEC5Zz46ecWC8KwkoMugY1KwFQqhZT', list: true}
+            {code : 'DXP', issuer : 'rM8AhEC5Zz46ecWC8KwkoMugY1KwFQqhZT'}
           ],
           logo : "img/gateway/dxperts.png"
         }
