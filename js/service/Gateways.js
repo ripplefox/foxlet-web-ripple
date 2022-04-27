@@ -7,7 +7,8 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           website : 'https://ripplefox.com/',
           deposit : 'https://ripplefox.com/deposit',
           assets : [
-            {code : 'USD', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "USDT", logo: "img/coin/usdt.svg", deposit: true, withdraw: "usdt@ripplefox.com"},
+            {code : 'USD', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "USDT", logo: "img/coin/usdt.svg", deposit: true, withdraw: "usdt@ripplefox.com"},            
+            {code : 'ETH', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "Ethereum", logo: "img/coin/eth.svg", deposit: true, withdraw: "eth@ripplefox.com"},
             {code : 'XLM', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "Stellar Lumens", logo: "img/coin/xlm.png", deposit: true},
             {code : 'ULT', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y', list: true, name: "Ultiledger", logo: "img/coin/ult.png"}
           ],
@@ -65,15 +66,6 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
             {code : 'SOLO', issuer : 'rsoLo2S1kiGeCcn6hCUXVrCpGMWLrRrLZz', list: true}
           ],
           logo : "img/gateway/sologenic.jpg"
-        },
-        "dxperts.org" : {
-          name : 'dxperts.org',
-          website : 'https://dxperts.org/',
-          service : [],
-          assets : [
-            {code : 'DXP', issuer : 'rM8AhEC5Zz46ecWC8KwkoMugY1KwFQqhZT'}
-          ],
-          logo : "img/gateway/dxperts.png"
         }
     };
     
@@ -117,7 +109,8 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           {code : 'CNY', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y'},
           {code : 'ULT', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y'},
           {code : 'USD', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y'},
-          {code : 'XLM', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y'}
+          {code : 'XLM', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y'},
+          {code : 'ETH', issuer : 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y'}
         ]
       }
     };
