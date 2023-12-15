@@ -130,6 +130,23 @@ myApp.factory('XrpApi', ['$rootScope', 'AuthenticationFactory', 'ServerManager',
           };
         });
       },
+
+      checkServerInfo() {
+        return new Promise(async (resolve, reject)=>{
+          try {
+            await this.connect();
+            let data = await _remote.getServerInfo();
+            const ledgers = data.completeLedgers.split('-');
+            const ledgerVersionRange = {
+              minLedgerVersion : Number(ledgers[0]),
+              maxLedgerVersion : Number(ledgers[1])
+            };
+            resolve(ledgerVersionRange);
+          } catch(e){            
+            reject(e);
+          };
+        });
+      },
       
       checkObjects(address) {
         return new Promise(async (resolve, reject)=>{
@@ -234,6 +251,11 @@ myApp.factory('XrpApi', ['$rootScope', 'AuthenticationFactory', 'ServerManager',
         return new Promise(async (resolve, reject)=>{
           try {
             await this.connect();
+            if (!opt.start) {
+              let ledgerRange = await this.checkServerInfo();
+              opt.minLedgerVersion = ledgerRange.minLedgerVersion;
+              opt.maxLedgerVersion = ledgerRange.maxLedgerVersion;
+            }            
             let data = await _remote.getTransactions(address, opt);
             let last_id = null;
             if (data.length) {
@@ -242,7 +264,7 @@ myApp.factory('XrpApi', ['$rootScope', 'AuthenticationFactory', 'ServerManager',
             console.log(data);
             resolve({id: last_id, transactions: data});
           } catch (err) {
-            console.error('getTx', err);
+            console.error('getTx', err, opt);
             reject(err);
           }
         });
