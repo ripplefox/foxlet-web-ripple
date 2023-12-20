@@ -72,6 +72,8 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
       }
 
       t.memos = tx.specification.memos;
+      t.xrc20 = getMemo(t.memos, "xrc20");
+
       t.date = tx.outcome.timestamp;
       tx.transaction = t;
       tx.effects = filterOrderbookChanges(tx.outcome.orderbookChanges, address, tx);
@@ -127,6 +129,16 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
         });
       }
       return effects;
+    }
+
+    function getMemo(memos, type) {
+      let output = "";
+      memos.forEach(memo =>{
+        if (memo.type == type) {
+          output = memo.data;
+        }
+      });
+      return output;
     }
     
   } ]);

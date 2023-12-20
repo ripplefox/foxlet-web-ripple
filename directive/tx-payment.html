@@ -25,6 +25,7 @@
 
 				<effects></effects>
 		</div>
+		<div class="hash" ng-show="tx.transaction.xrc20">{{tx.transaction.xrc20}}</a> </div>
 		<div class="hash" ng-show="currentNetwork.networkType != 'xag'"> <a href="https://xrpscan.com/tx/{{tx.id}}" target="_blank">{{tx.id}}</a> </div>
 		<div class="hash" ng-show="currentNetwork.networkType == 'xag'"> <a href="https://scan.xrpgen.com/#!/tx?data={{tx.id}}" target="_blank">{{tx.id}}</a> </div>
 	</div>
