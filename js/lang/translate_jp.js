@@ -88,7 +88,8 @@ var translate_jp = {
   send_done    : '送金成功',
   not_funded   : 'アクティブ化されていません。10枚以上の{{code}}を発送してアカウントを作ってください。31枚以上がお勧めします。',
   no_send_path : 'あなたと相手アカウント間のパスが見つかりませんでした。',
-  you_sending : 'あなたは{{code}}を以下のアドレスへ発送します',
+  you_sending : 'あなたは',
+  you_sending_to : 'を以下のアドレスへ発送します',
 
   contacts : '連絡帳',
   contact  : '連絡者',

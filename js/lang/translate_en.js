@@ -88,7 +88,8 @@ var translate_en = {
   send_done    : 'Asset successfully sent.',
   not_funded   : 'Not funded. To create this account, send it at least 10 {{name}}s ({{code}}).',
   no_send_path : 'Unable to find a path between you and the destination account.',
-  you_sending : 'You are sending {{code}} to',
+  you_sending : 'You are sending ',
+  you_sending_to : ' to',
 
   contacts : 'Contacts',
   contact  : 'Contact',
