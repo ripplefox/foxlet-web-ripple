@@ -43,6 +43,7 @@
 							<div>
 								<a class="BalancesTable__row__removeLink" href="javascript:" ng-click="resolveDeposit(code, line.issuer)" ng-show="hasService(code, line.issuer)">{{'deposit' | translate}}</a>
 								<a class="BalancesTable__row__removeLink" href="javascript:" ng-click="goSend(code, line.issuer)" ng-show="hasService(code, line.issuer)">{{'withdraw' | translate}}</a>
+								<a class="BalancesTable__row__removeLink" href="javascript:" ng-click="goMint(code, line.issuer)" ng-show="isXrps(code, line.issuer)">{{'mint' | translate}}</a>
 								<a class="BalancesTable__row__removeLink" href="javascript:" ng-click="goTrade(code, line.issuer)">{{'trade' | translate}}</a>
 							</div>
 						</td>

@@ -69,6 +69,7 @@ var translate_cn = {
   manual_add : '手动授信',
   issuer_invalid : '发行方账号必须是有效的瑞波地址编码。',
   trust_granted  : '设置信任额度成功！',
+  mint: '铸造',
 
   /** send **/
   send : '发送',

@@ -69,6 +69,7 @@ var translate_en = {
   manual_add : 'Manually add trust',
   issuer_invalid : 'Asset issuer account ID must be a valid account ID',
   trust_granted  : 'Trust is granted!',
+  mint : 'Mint',
 
   /** send **/
   send : 'Send',

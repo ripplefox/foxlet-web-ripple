@@ -51,6 +51,10 @@ myApp.controller("BalanceCtrl", [ '$scope', '$rootScope', '$location', '$http', 
       return !!$rootScope.getGateway(code, issuer).deposit;
     }
 
+    $scope.isXrps = function(code, issuer) {
+      return fmtCode(code) == "XRPS" && issuer == "rN1bCPAxHDvyJzvkUso1L2wvXufgE4gXPL";
+    }
+
     $scope.show_deposit = false;
     $scope.deposit_error = "";
     $scope.deposit_info = {};
@@ -112,6 +116,13 @@ myApp.controller("BalanceCtrl", [ '$scope', '$rootScope', '$location', '$http', 
     $scope.goSend = function(code, issuer){
       let gateway = $rootScope.getGateway(code, issuer);
       $location.path('/send').search({ address: gateway.withdraw });
+    }
+
+    $scope.goMint = function(code, issuer){
+      code = fmtCode(code);
+      let gateway = $rootScope.getGateway(code, issuer);
+      console.log(code, gateway);
+      $location.path('/send').search({ address: gateway.mint });
     }
     
     $scope.$on("balanceUpdate", function() {

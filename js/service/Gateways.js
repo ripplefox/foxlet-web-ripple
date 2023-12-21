@@ -6,7 +6,7 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
           name : 'xrps.io',
           website : 'https://xrps.io/',
           assets : [
-            {code : 'XRPS', issuer : 'rN1bCPAxHDvyJzvkUso1L2wvXufgE4gXPL', list: true, name: "XRP Inscription"}
+            {code : 'XRPS', issuer : 'rN1bCPAxHDvyJzvkUso1L2wvXufgE4gXPL', list: true, name: "XRP Inscription", logo: "img/coin/xrps.png", mint: "mint@xrps.io"}
           ],
           logo : "img/coin/xrps.png"
         },
@@ -87,7 +87,8 @@ myApp.factory('Gateways', ['$rootScope', function($rootScope) {
               website : gateway.website,
               logo : asset.logo,
               deposit : asset.deposit ? gateway.deposit : "",
-              withdraw : asset.withdraw ? asset.withdraw : asset.code.toLowerCase() + "@" + gateway.name
+              withdraw : asset.withdraw ? asset.withdraw : asset.code.toLowerCase() + "@" + gateway.name,
+              mint : asset.mint ? asset.mint : "mint@" + gateway.name
           };
         }
         _asset2gateway[asset.issuer] = {

@@ -69,6 +69,7 @@ var translate_jp = {
   manual_add : '手作業で与信する',
   issuer_invalid : '発行者アカウントは有効なリップルアドレスである必要があります。',
   trust_granted  : '与信限度額設定成功！',
+  mint : '鋳造',
 
   /** send **/
   send : '発送',
