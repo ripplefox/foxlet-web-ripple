@@ -12,7 +12,7 @@
 						{{error_msg | translate:currentNetwork.coin}}
 			</div>
 				
-			<div class="history class="col-xs-12">
+			<div class="history" class="col-xs-12">
 				<div ng-repeat="tx in history" ng-switch="tx.type">
 					<tx-payment ng-switch-when="payment"></tx-payment>
 					<tx-trust ng-switch-when="trustline"></tx-trust>

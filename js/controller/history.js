@@ -132,6 +132,9 @@ myApp.controller("HistoryCtrl", [ '$scope', '$rootScope', 'XrpApi', 'Authenticat
     }
 
     function getMemo(memos, type) {
+      if (!memos) {
+        return "";
+      }
       let output = "";
       memos.forEach(memo =>{
         if (memo.type == type) {
