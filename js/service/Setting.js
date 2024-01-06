@@ -8,9 +8,8 @@ myApp.factory('SettingFactory', function($window) {
         translationKey: 'public_url',
         networkType: 'xrp',
         servers: [          
-          {server: 'xrplcluster.com', port: 443},
-          {server: 'xrpl.link', port: 443},
-          {server: 'xrpl.ws', port: 443}
+          {server: 's1.ripple.com', port: 443},
+          {server: 's2.ripple.com', port: 443}
         ],
         coin: {
           name: "ripple",

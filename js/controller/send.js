@@ -131,7 +131,7 @@ myApp.controller("SendCtrl", ['$scope', '$rootScope', '$routeParams', 'XrpApi', 
       } else {
         amount = {
             currency : $scope.asset.code,
-            issuer : $scope.real_address,
+            issuer : $scope.asset.issuer,
             value : $scope.asset.amount.toString()
         }
       }
@@ -151,8 +151,22 @@ myApp.controller("SendCtrl", ['$scope', '$rootScope', '$routeParams', 'XrpApi', 
         startTimer();
 
         if (err) {
-          $scope.send_error = err.message;
           $scope.stopPath();
+          if (err.message !== "Unknown method.") {
+            $scope.send_error = err.message;
+            return;
+          }
+          // s1, s2 does not support path;
+          $scope.found = true;
+          // only need to create for issued assets
+          if ($scope.asset.code !== native.code) {
+            $scope.paths = [{
+              origin : { source_amount : amount },
+              code : $scope.asset.code,
+              value : $scope.asset.amount,
+              rate : "1"
+            }];
+          }
         } else {
           console.log('path', data);
           $scope.found = true;
@@ -296,7 +310,7 @@ myApp.controller("SendCtrl", ['$scope', '$rootScope', '$routeParams', 'XrpApi', 
           $scope.stopPath(true);
         } else {
           $scope.send = res.data.quote.send;
-          $scope.asset = {code: $scope.send[0].currency, amount: $scope.send[0].value};
+          $scope.asset = {code: $scope.send[0].currency, amount: $scope.send[0].value, issuer: $scope.send[0].issuer};
           $scope.tag = res.data.quote.destination_tag;
           $scope.invoice = res.data.quote.invoice_id;
           $scope.memos = res.data.quote.memos;
@@ -426,8 +440,8 @@ myApp.controller("SendCtrl", ['$scope', '$rootScope', '$routeParams', 'XrpApi', 
         }
       }
       
-      var payment = !alt ? XrpApi.payment($scope.real_address, srcAmount, dstAmount, $scope.tag, $scope.invoice, $scope.memos) :
-                       XrpApi.pathPayment($scope.real_address, srcAmount, dstAmount, alt.paths_computed, $scope.tag, $scope.invoice, $scope.memos);
+      var payment = alt && alt.paths_computed ? XrpApi.pathPayment($scope.real_address, srcAmount, dstAmount, alt.paths_computed, $scope.tag, $scope.invoice, $scope.memos) :
+                       XrpApi.payment($scope.real_address, srcAmount, dstAmount, $scope.tag, $scope.invoice, $scope.memos);
       payment.then(hash => {
         $scope.hash = hash;
         $scope.tx_state = "submitted";
