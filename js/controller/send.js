@@ -131,7 +131,7 @@ myApp.controller("SendCtrl", ['$scope', '$rootScope', '$routeParams', 'XrpApi', 
       } else {
         amount = {
             currency : $scope.asset.code,
-            issuer : $scope.asset.issuer,
+            issuer : $scope.real_address,
             value : $scope.asset.amount.toString()
         }
       }
@@ -160,6 +160,19 @@ myApp.controller("SendCtrl", ['$scope', '$rootScope', '$routeParams', 'XrpApi', 
           $scope.found = true;
           // only need to create for issued assets
           if ($scope.asset.code !== native.code) {
+            if (!$scope.asset.issuer) { // Not federation protocol, it does not have issuer.
+              var default_issuer = null;
+              if ($rootScope.lines[$scope.asset.code]) {
+                const gatewayKeys = Object.keys($rootScope.lines[$scope.asset.code]);
+                if (gatewayKeys.length) {
+                  const first_issuer = gatewayKeys[0];
+                  default_issuer = Number($rootScope.lines[$scope.asset.code][first_issuer].balance) > 0 ? first_issuer : null;
+                }
+              }
+              amount.issuer = default_issuer || $rootScope.address;
+            } else {
+              amount.issuer = $scope.asset.issuer;
+            }
             $scope.paths = [{
               origin : { source_amount : amount },
               code : $scope.asset.code,
